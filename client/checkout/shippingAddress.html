@@ -1,0 +1,29 @@
+<template name="checkoutShippingAddress">
+    <h2>2 - Delivery Address</h2>
+    {{#if showTemplate}}
+        {{#if submitted }}
+            {{#with currentAddress }}
+                {{> address }}
+                <a href="#" class="edit-address">Change / Edit</a>
+            {{/with}}
+        {{else}}
+            {{#if shippingAddresses}}
+                <form name="shippingAddressSelect" action="#" method="POST">
+                    <label for="shipping-address">Select an address:
+                        <select name="shipping-address" id="shippingAddressId">
+                            {{#each shippingAddresses}}
+                                <option value="{{id}}">{{address1}}, {{postcode}}</option>
+                            {{/each}}
+                        </select>
+                    </label>
+                    <input type="submit" value="Submit" />
+                </form>
+                <p>- or -</p>
+            {{/if}}
+            <p>Enter a new delivery address:</p>
+            <a href="#" id="copyBillingAddress">Copy Billing Address?</a>
+            {{> shippingAddressForm }}
+        {{/if}}
+    {{/if}}
+</template>
+

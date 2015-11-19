@@ -1,0 +1,92 @@
+<template name="userProfile">
+    <h1>Profile</h1>
+    {{#if Template.subscriptionsReady }}
+        {{#if currentUser}}
+            <p>
+                E-mail : {{email}}<br />
+                <a href="#" id="resetPassword">Reset your password.</a>
+            </p>
+            <h2>Billing Details</h2>
+            <p>
+                {{#if billingAddresses}}
+                    {{#each billingAddresses}}
+                        {{> address}}
+                        {{#if this.isDefault}}
+                            <i class="fa fa-check-circle"></i>
+                        {{else}}
+                            <a href="#" class="set-default">Set as Default</a>
+                        {{/if}}
+                        <a href="#" class="delete">Delete</a>
+                    {{/each}}
+                {{else}}
+                    You haven't added a billing address yet.
+                {{/if}}
+            </p>
+            {{#if addBillingAddress}}
+                {{> billingAddressForm }}
+                <a href="#" id="cancelAddBillingAddress">Cancel</a>
+            {{else}}
+                <p><a href="#" id="addBillingAddress">Add New Address</a></p>
+            {{/if}}
+            <h2>Delivery Details</h2>
+            <p>
+                {{#if shippingAddresses}}
+                    {{#each shippingAddresses}}
+                        {{> address}}
+                        {{#if this.isDefault}}
+                            <i class="fa fa-check-circle"></i>
+                        {{else}}
+                            <a href="#" class="set-default">Set as Default</a>
+                        {{/if}}
+                        <a href="#" class="delete">Delete</a>
+                    {{/each}}
+                {{else}}
+                    You haven't added a delivery address yet.
+                {{/if}}
+            </p>
+            {{#if addShippingAddress}}
+                {{> shippingAddressForm }}
+                <a href="#" id="cancelAddShippingAddress">Cancel</a>
+            {{else}}
+                <p><a href="#" id="addShippingAddress">Add New Address</a></p>
+            {{/if}}
+            <h2>Previous Orders</h2>
+            {{#if orders}}
+                {{#each orders}}
+                    {{> order}}
+                {{/each}}
+            {{else}}
+                <p>You haven't placed an order with us yet :(</p>
+            {{/if}}
+        {{else}}
+            {{> pleaseLogin}}
+        {{/if}}
+    {{else}}
+        {{> loading}}
+    {{/if}}
+</template>
+
+<template name="address">
+    <p>
+        {{#if this.company}}
+            {{this.company}}<br />
+        {{/if}}
+        {{this.firstName}} {{this.surname}}<br />
+        {{this.address1}}<br />
+        {{#if this.address2}}
+            {{this.address2}}<br />
+        {{/if}}
+        {{#if this.address3}}
+            {{this.address3}}<br />
+        {{/if}}
+        {{this.town}}<br />
+        {{#if this.county}}
+            {{this.county}}<br />
+        {{/if}}
+        {{this.postcode}}<br />
+        {{this.country}}<br />
+        {{#if this.telephone}}
+            {{this.telephone}}<br />
+        {{/if}}
+    </p>
+</template>

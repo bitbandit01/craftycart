@@ -1,0 +1,15 @@
+<template name="loginForm">
+        <div id="login-error">
+            Sorry, those details were incorrect. Please try again, or click on 'Forgot your password'.
+        </div>
+        <form id="loginForm" action="#">
+            <label for="email">E-mail:
+                <input type="email" id="login-email" placeholder="E-mail address" />
+            </label>
+            <label for="password">Password:
+                <input type="password" id="login-password" placeholder="Password" />
+            </label>
+            <input type="submit" id="login-button" value="Sign in" />
+        </form>
+        <p><a href="#" id="resetPassword">Forgot your password?</a></p>
+</template>

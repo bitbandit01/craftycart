@@ -1,0 +1,26 @@
+<template name="order">
+    <hr />
+    <p>Order Number: {{orderNum}}</p>
+    <p>Order Date: {{formatDate createdAt}}</p>
+    <p>
+        {{#each cart}}
+            {{name}} x{{qty}} @{{formatMoney price}}<br />
+        {{/each}}
+    </p>
+    <p>
+        Subtotal : {{formatMoney subtotal}}<br />
+        Shipping : {{formatMoney shipping}}<br />
+        Included VAT @ 20% : {{formatMoney vat }}<br />
+        <b>Total : {{formatMoney total}}</b>
+    </p>
+    <p>
+        Payment Status : Paid <br />
+        Fulfillment Status : Shipped <br />
+        Shipped Date : <br />
+        Courier : DPD <br />
+        Tracking Number : 16027551234091 <a href="#">Track this parcel</a>
+    </p>
+    <p>
+        <a href="#">Download Invoice / VAT Receipt</a>
+    </p>
+</template>

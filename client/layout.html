@@ -1,0 +1,27 @@
+<template name="layout">
+    <body>
+        <h1>Crafty Cart</h1>
+        <a href="{{pathFor 'home'}}">Home</a>
+        <a href="{{pathFor 'cart'}}">Cart</a><br /><br />
+        {{> userHeader }}
+        {{> miniCart }}
+        {{> notifications}}
+        <hr />
+        {{#if showLogin}}
+            {{> login}}
+            <a href="#" id="cancelLogin">&lt;&lt; Go Back</a>
+        {{else}}
+            {{> Template.dynamic template=content}}
+        {{/if}}
+    </body>
+</template>
+
+<template name="userHeader">
+    {{#if currentUser}}
+        <p>Logged in as {{userEmail}}.</p>
+        <a href="{{pathFor 'userProfile'}}">My Account</a> |
+        <a href="#" id="logout">Logout</a>
+    {{else}}
+        <a href="#" id="login">Login</a>
+    {{/if}}
+</template>

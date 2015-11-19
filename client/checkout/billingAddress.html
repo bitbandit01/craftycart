@@ -1,0 +1,25 @@
+<template name="checkoutBillingAddress">
+    <h2>1 - Billing Address</h2>
+    {{#if submitted }}
+        {{#with currentAddress }}
+            {{> address }}
+            <a href="#" class="edit-address">Change / Edit</a>
+        {{/with}}
+    {{else}}
+        {{#if billingAddresses}}
+            <form name="billingAddressSelect" action="#" method="POST">
+                <label for="billing-address">Select an address:
+                    <select name="billing-address" id="billingAddressId">
+                        {{#each billingAddresses}}
+                            <option value="{{id}}">{{address1}}, {{postcode}}</option>
+                        {{/each}}
+                    </select>
+                </label>
+                <input type="submit" value="submit" />
+            </form>
+            <p>- or -</p>
+        {{/if}}
+        <p>Enter a new billing address:</p>
+        {{> billingAddressForm }}
+    {{/if}}
+</template>

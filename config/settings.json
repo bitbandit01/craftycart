@@ -1,0 +1,15 @@
+{
+  "public": {
+    "persistent_session": {
+      "default_method": "persistent"
+    },
+    "stripe" : {
+        "testPublishableKey" : "pk_test_ypXVj5MuvpwOPC1mDWDElcGj"
+    }
+  },
+  "private" : {
+      "stripe" : {
+          "testSecretKey" : "sk_test_kqi9LWdCnSWsFmiAEkPl2x9W"
+      }
+  }
+}

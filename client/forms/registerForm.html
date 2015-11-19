@@ -1,0 +1,17 @@
+<template name="registerForm">
+    <div id="register-error">
+        Sorry, we couldn't create your account.  Please try again.
+    </div>
+    <form id="registerForm" action="#">
+        <label for="email">E-mail:
+            <input type="email" name="email" id="account-email" placeholder="E-mail address" />
+        </label>
+        <label for="password">Password:
+            <input type="password" name="password" id="account-password" placeholder="Password" />
+        </label>
+        <label for="confirmPassword">Confirm Password:
+            <input type="password" name="confirmPassword" id="confirm-password" placeholder="Confirm Password" />
+        </label>
+        <input type="submit" id="register-button" value="Register" />
+    </form>
+</template>

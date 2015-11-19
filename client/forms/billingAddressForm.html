@@ -1,0 +1,40 @@
+<template name="billingAddressForm">
+    <form name="billingAddressForm" id="billingAddressForm" action="#" method="POST" >
+        <input type="hidden" name="type" value="Billing" />
+        <label for="country">Country:
+            <select name="country">
+                {{#each countries}}
+                    <option name="{{text}}" value="{{value}}">{{value}}</option>
+                {{/each}}
+            </select>
+        </label>
+        <label for="company">Company:
+            <input type="text" name="company" />
+        </label>
+        <label for="firstName">First Name:
+            <input type="text" name="firstName" />
+        </label>
+        <label for="surname">Surname:
+            <input type="text" name="surname" />
+        </label>
+        <label for="address1">Address 1:
+            <input type="text" name="address1" />
+        </label>
+        <label for="address2">Address 2:
+            <input type="text" name="address2" />
+        </label>
+        <label for="address3">Address 3:
+            <input type="text" name="address3" />
+        </label>
+        <label for="town">Town:
+            <input type="text" name="town" />
+        </label>
+        <label for="county">County:
+            <input type="text" name="county" />
+        </label>
+        <label for="postcode">Postcode:
+            <input type="text" name="postcode" />
+        </label>
+        <input type="submit" value="Submit" />
+    </form>
+</template>

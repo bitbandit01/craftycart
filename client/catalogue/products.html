@@ -1,0 +1,14 @@
+<template name="index">
+    {{#each products}}
+        {{> product}}
+    {{/each}}
+</template>
+
+<template name="product">
+    <p>
+        <h2>{{name}}</h2>
+        <b>{{formatMoney price}}</b><br />
+        <span>{{available}} Available</span><br />
+        <a class="add-to-cart" href="#">Add to Cart</a>
+    </p>
+</template>

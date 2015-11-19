@@ -1,0 +1,13 @@
+/* CSS declarations go here */
+label {
+    display: block;
+}
+
+#login-error,
+#register-error,
+#recovery-error,
+#recovery-success,
+#reset-error,
+#reset-success{
+    display: none;
+}

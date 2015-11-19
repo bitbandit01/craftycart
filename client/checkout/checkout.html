@@ -1,0 +1,22 @@
+<template name="checkout">
+    <h1>Checkout</h1>
+    {{#if Template.subscriptionsReady }}
+        {{#if currentUser}}
+            {{> checkoutBillingAddress }}
+            {{> checkoutShippingAddress }}
+            {{> checkoutShippingMethod }}
+            {{> checkoutPayment }}
+        {{else}}
+            {{> login}}
+        {{/if}}
+    {{else}}
+        {{> loading}}
+    {{/if}}
+</template>
+
+
+
+
+
+
+

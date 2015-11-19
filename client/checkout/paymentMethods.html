@@ -1,0 +1,23 @@
+<template name="checkoutPayment">
+    <h2>4 - Enter Payment Details</h2>
+    {{#if showTemplate}}
+        <form name="stripeForm" id="stripeForm" method="GET" action="#">
+            <label for="name">Cardholders Name:
+                <input type="text" id="cardName" data-stripe="name" placeholder="Full Name" />
+            </label>
+            <label for="number">Card Number:
+                <input type="text" id="cardNumber" data-stripe="number" placeholder="Card No."/>
+            </label>
+            <label for="exp_month">Expiration Month:
+                <input type="text" id="cardMonth" data-stripe="exp_month" placeholder="Exp. Mo.">
+            </label>
+            <label for="exp_year">Expiration Year:
+                <input type="text" id="cardYear" data-stripe="exp_year" placeholder="Exp. Yr.">
+            </label>
+            <label for="cvc">CVV:
+                <input type="text" length="3" id="cardCVC" data-stripe="cvc" placeholder="3-digits" />
+            </label>
+            <input type="submit" value="Complete Payment" />
+        </form>
+    {{/if}}
+</template>

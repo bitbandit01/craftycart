@@ -1,0 +1,12 @@
+<template name="login">
+    {{#if currentUser}}
+        <h1>You are already logged in.</h1>
+    {{else}}
+        <h2>Login</h2>
+        <p>Welcome, please enter your details to sign in: </p>
+        {{> loginForm}}
+        <p>Don't have an account? Register below, it only takes a minute!</p>
+        <h2>Register</h2>
+        {{> registerForm}}
+    {{/if}}
+</template>
