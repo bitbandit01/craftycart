@@ -43,13 +43,15 @@ Template.cartTotals.helpers({
         return CartsMeta.findOne({sessionId : Session.get('cartId')});
     },
     showDiscount : function(){
-        return !! CartsMeta.findOne({sessionId : Session.get('cartId')}).coupon.length;
+        var cart = CartsMeta.findOne({sessionId : Session.get('cartId')});
+        return cart && cart.coupon.length > 0 ? true : false;
     }
 });
 
 Template.cartDiscount.helpers({
     coupon : function(){
-        return CartsMeta.findOne({sessionId : Session.get('cartId')}).coupon;
+        var cart = CartsMeta.findOne({sessionId : Session.get('cartId')})
+        return cart && cart.coupon.length > 0 ? cart.coupon : false;
     }
 });
 
