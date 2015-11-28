@@ -11,14 +11,18 @@ Meteor.methods({
             cart : [],
             paymentMethod : paymentMethod,
             transactionId : transactionId,
-            createdAt : Date()
+            paymentStatus : 'Paid',
+            fulfillmentStatus : 'Processing',
+            createdAt : new Date()
         };
         //Get the cart items so we can save the items ordered
         var carts = Carts.find({sessionId : sessId}).fetch();
         _.each(carts, function(cart){
            order.cart.push({
                'item' : cart.item._id,
+               'sku' : cart.item.sku,
                'name' : cart.item.name,
+               'size' : cart.item.size,
                'price' : cart.item.price,
                'qty' : cart.qty
            });

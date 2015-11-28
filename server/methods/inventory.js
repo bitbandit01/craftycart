@@ -5,7 +5,7 @@ Meteor.methods({
         if(qty < 1){
             Meteor.throw(new Match.Error);
         }
-        Products.update({_id : itemId}, {$inc : {available : (qty*-1)}});
+        Inventory.update({_id : itemId}, {$inc : {inStock : (qty*-1)}});
         return true;
     }
 });
@@ -16,8 +16,8 @@ Meteor.methods({
 checkInventory = function(itemId, qty){
     check(itemId, String);
     check(qty, Match.Integer);
-    var item = Products.findOne(itemId);
-    if(qty > item.available){
+    var item = Inventory.findOne(itemId);
+    if(qty > item.inStock){
         throw new Meteor.Error("no-stock", "Not enough stock available to fulfill your request");
     }else{
         return;

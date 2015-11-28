@@ -11,13 +11,27 @@ Schema.orderSchema = new SimpleSchema([
                 }
             },
         },
+        paymentStatus : {
+            type : String,
+            allowedValues : ['Pending', 'Paid', 'Part-Refunded', 'Refunded']
+        },
+        fulfillmentStatus : {
+            type : String,
+            allowedValues : ['Processing', 'Part-Shipped', 'Shipped']
+        },
         cart : {
             type : [Object]
         },
         'cart.$.item' : {
             type : String
         },
+        'cart.$.sku' : {
+            type : String
+        },
         'cart.$.name' : {
+            type : String
+        },
+        'cart.$.size' : {
             type : String
         },
         'cart.$.qty' : {

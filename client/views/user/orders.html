@@ -4,7 +4,7 @@
     <p>Order Date: {{formatDate createdAt}}</p>
     <p>
         {{#each cart}}
-            {{name}} x{{qty}} @{{formatMoney price}}<br />
+            {{name}} - {{size}} x{{qty}} @{{formatMoney price}}<br />
         {{/each}}
     </p>
     <p>

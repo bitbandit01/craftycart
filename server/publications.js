@@ -1,5 +1,16 @@
 Meteor.publish('products', function(){
-    return Products.find();
+    //Return only published products
+    return Products.find({publish : true});
+});
+
+Meteor.publish('aProduct', function(code){
+    //Return a single product based on its code
+    return Products.find({publish : true, code : code});
+});
+
+Meteor.publish('inventory', function(){
+    //Return only variants which have been marked as available for sale
+    return Inventory.find({available : true});
 });
 
 Meteor.publish('checkout', function(sessId){

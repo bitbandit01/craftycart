@@ -4,7 +4,7 @@
         <table id="shopping-cart">
             <thead>
                 <tr>
-                    <th>Product</th><th>Qty</th><th>Price</th><th>Remove</th>
+                    <th>SKU</th><th>Product</th><th>Size</th><th>Qty</th><th>Price</th><th>Remove</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,7 +21,9 @@
 
 <template name="cartRow">
 <tr>
+    <td>{{item.sku}}</td>
     <td>{{item.name}}</td>
+    <td>{{item.size}}</td>
     <td>
         <input type="number" value="{{qty}}" />
     </td>

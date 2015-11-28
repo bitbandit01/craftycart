@@ -1,0 +1,20 @@
+<template name="product">
+    {{#if Template.subscriptionsReady}}
+        {{#with product}}
+            <h2>{{name}}</h2>
+            <p>{{description}}</p>
+            {{#each variants code}}
+                <p>{{size}}</p>
+                <b>{{formatMoney price}}</b><br />
+                <span>{{inStock}} Available</span><br />
+                {{#if inStock}}
+                    <a class="add-to-cart" href="#">Add to Cart</a>
+                {{else}}
+                    <span>Temporarily out of stock</span>
+                {{/if}}
+            {{/each}}
+        {{/with}}
+    {{else}}
+        {{>loading}}
+    {{/if}}
+</template>
