@@ -50,6 +50,14 @@ if(Meteor.isServer){
         post : function(){
             err = [];
             res = [];
+            try{
+                check(this.request.body, Array);
+            }catch(e){
+                return {
+                    statusCode: 500,
+                    body: "Expected an Array of Products"
+                };
+            }
             _.each(this.request.body, function(product){
                 var found = Products.findOne({code : product.code});
                 if(found){
@@ -199,6 +207,70 @@ if(Meteor.isServer){
                 statusCode: 200,
                 body: orders
             };
+        }
+    });
+    
+    Api.addRoute('orders/:orderNum', {authRequired : true}, {
+        get : function(){
+            var orderNum = this.urlParams.orderNum;
+            var order = Orders.findOne({orderNum : orderNum});
+            if(!order) {
+                return {
+                    statusCode: 404,
+                    body: 'Order does not exist'
+                }
+            }else{
+                return {
+                    statusCode: 200,
+                    body: order
+                };
+            }
+        },
+        post : function() {
+            try { 
+                var orderNum = this.urlParams.orderNum;
+                check(orderNum, String);
+                var order = Orders.findOne({orderNum : orderNum});
+                if(!order){
+                    return {
+                        statusCode : 404,
+                        body : "Order does not exist"
+                    };
+                }
+                //Data is an object
+                var data = this.request.body;
+                check(data, Object);
+                //Data should contain some keys to update
+                if(Object.keys(data).length < 1){
+                    return {
+                        status : 500,
+                        body : "Empty request"
+                    }
+                }
+                //This allows partial updating of only the keys in the request,
+                //rather than having to do a put of the entire Order document
+                var disallowed = ['orderNum']; //keys that cant be updated
+                _.each(data, function(val, key){
+                    var obj = {};
+                    obj[key] = val;
+                    if(disallowed.indexOf(key) == -1){
+                        Orders.update({orderNum : orderNum}, {$set : obj});
+                    }                  
+                });
+                return {
+                    statusCode : 200,
+                    body : "Record updated successfully"
+                };
+            } catch(e){
+                //Log the error
+                console.log(e);
+                return {
+                    statusCode : 500,
+                    body : {
+                        error : "Malformed request"
+                    }
+                };
+            }
         }
     });
 }

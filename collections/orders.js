@@ -5,10 +5,15 @@ Schema.orderSchema = new SimpleSchema([
         orderNum : {
             type : String,
             autoValue : function(){
-                //Only set it if not already present
-                if(Meteor.isServer && !this.isSet){
-                    return Meteor.hashid();
-                }
+                //Only set on insert/upsert
+                if(Meteor.isServer){
+                    if(this.isInsert || this.isUpsert){
+                        //Only set it if not already present
+                        if(!this.isSet){
+                            return Meteor.hashid();
+                        }
+                    }    
+                }  
             },
         },
         paymentStatus : {
@@ -17,7 +22,7 @@ Schema.orderSchema = new SimpleSchema([
         },
         fulfillmentStatus : {
             type : String,
-            allowedValues : ['Processing', 'Part-Shipped', 'Shipped']
+            allowedValues : ['Cancelled', 'Processing', 'Part-Shipped', 'Shipped', 'Returned']
         },
         cart : {
             type : [Object]
@@ -45,6 +50,20 @@ Schema.orderSchema = new SimpleSchema([
         },
         transactionId : {
             type : String
+        },
+        shipments : {
+            type : [Object],
+            optional : true
+        },
+        'shipments.$.carrier' : {
+            type : String
+        },
+        'shipments.$.shipmentDate' : {
+            type : Date
+        },
+        'shipments.$.trackingNum' : {
+            type : String,
+            optional : true
         },
         createdAt : {
             type : Date
