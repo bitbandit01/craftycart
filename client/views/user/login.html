@@ -1,12 +1,16 @@
 <template name="login">
-    {{#if currentUser}}
-        <h1>You are already logged in.</h1>
-    {{else}}
-        <h2>Login</h2>
-        <p>Welcome, please enter your details to sign in: </p>
-        {{> loginForm}}
-        <p>Don't have an account? Register below, it only takes a minute!</p>
-        <h2>Register</h2>
-        {{> registerForm}}
-    {{/if}}
+    <div class="row">
+        <div class="small-12 columns">
+            {{#if currentUser}}
+                <h1>You are already logged in.</h1>
+            {{else}}
+                <h1>Sign-In</h1>
+                <p>Welcome back, please enter your details to sign in: </p>
+                {{> loginForm}}
+                <p>Don't have an account?</p>
+                <a class="button" href="#">Sign Up Now</a>
+                <p>It only takes a moment...</p>
+            {{/if}}    
+        </div>
+    </div>
 </template>

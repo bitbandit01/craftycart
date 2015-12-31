@@ -1,27 +1,392 @@
-<template name="layout">
-    <body>
-        <h1>Crafty Cart</h1>
-        <a href="{{pathFor 'home'}}">Home</a>
-        <a href="{{pathFor 'cart'}}">Cart</a><br /><br />
-        {{> userHeader }}
-        {{> miniCart }}
-        {{> notifications}}
-        <hr />
-        {{#if showLogin}}
-            {{> login}}
-            <a href="#" id="cancelLogin">&lt;&lt; Go Back</a>
-        {{else}}
-            {{> Template.dynamic template=content}}
-        {{/if}}
-    </body>
-</template>
+<head>
+    <meta name="charset" content="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crafty Cart</title>
+</head>
 
-<template name="userHeader">
-    {{#if currentUser}}
-        <p>Logged in as {{userEmail}}.</p>
-        <a href="{{pathFor 'userProfile'}}">My Account</a> |
-        <a href="#" id="logout">Logout</a>
-    {{else}}
-        <a href="#" id="login">Login</a>
-    {{/if}}
+<template name="layout">
+
+    <body>
+        <div class="off-canvas-wrapper">
+            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+                <div class="off-canvas position-right" id="offCanvas" data-off-canvas data-position="right">
+                    <a class="close-button" data-close>x</a> {{> login }}
+                </div>
+                <div class="main-content" data-off-canvas-content>
+                    <!-- Top Navigation Bar -->
+                    <nav class="top-bar" data-topbar role="navigation">
+                        <div class="top-bar-left">
+                            <ul class="menu">
+                                <li class="menu-text">
+                                    <a href="/"><img src="/images/crafty-logo.png" width="50px" height="50px" />Crafty Fragrances</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="top-bar-right">
+                            <!--              <ul class="right">
+                                 <li class="nav-item"><a class="" href="/"><i class="fi-shopping-cart white"></i> Shopping Cart</a></li>
+                                 <li class="divider"></li>
+                                 <li class="nav-item"><a class="" href="/">My Orders</a></li>
+                                 <li class="divider"></li>
+                                 <li class="nav-item"><a class="" href="/">My Account</a></li>
+                                 <li class="divider"></li>
+                                 <li class="nav-item"><a class="" href="/">Logout</a></li>
+                            </ul> -->
+                            <ul class="menu">
+                                <li class="menu-text">
+                                    {{> miniCart }}
+                                </li>
+                                <li>
+                                    <button class="alert button" data-toggle="offCanvas"><i class="fa fa-user"></i> Login / Register</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <nav class="top-bar" data-topbar role="navigation">
+                        <!--    <ul class="title-area">-->
+                        <!--        <li class="name"></li>-->
+                        <!--        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>-->
+                        <!--    </ul>-->
+                        <div class="top-bar-left">
+                            <ul class="menu">
+                                <li><a href="/"><i class="fa fa-home"> </i>Home</a></li>
+                                <li><a href="/products">Products</a></li>
+                                <li><a href="/contact">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <div class="top-bar-right">
+                            <ul class="menu">
+                                <li>
+                                    <input type="search" placeholder="Search">
+                                </li>
+                                <li>
+                                    <button type="button" class="button">Search</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <!-- Header -->
+                    <!--<header class="row hidden-for-small-down" role="banner">-->
+                    <!--  <div class="medium-12 columns">-->
+                    <!--    <h1>Crafty Fragrances</h1>-->
+                    <!--  </div>-->
+                    <!--</header>-->
+
+                    <!-- Breadcrumbs -->
+                    <div class="row">
+                        <div class="small-12 columns">
+                            <ul class="breadcrumbs">
+                                <li><a href="#">Home</a></li>
+                                <li class="current">This Page</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Body Content -->
+                    <div class="row">
+                        <div class="small-12 columns">
+                            {{> notifications}} 
+                            {{> Template.dynamic template=content}}
+                        </div>
+                    </div>
+
+                <div class="row">
+                    <div class="medium-8 small-12 columns">
+                        <div class="row">
+                            <div class="small-12 columns">
+                                <h2 class="inverse-header"><img src="/images/savings-fox.png" /> Crafty Savings!</h2>
+                            </div>
+                        </div>
+                        <div class="row small-up-2 medium-up-3 large-up-4">
+                            <div class="column">
+                                <a href="/">
+                                    <img src="http://www.fillmurray.com/200/200" />
+                                    <div class="panel">
+                                        <span class="grid-product-name">Perfumer's Alcohol</span>
+                                        <br />
+                                        <!--<span class="grid-product-price-discounted">£9.99</span>
+                                <span class="grid-product-price">£9.99</span><br />-->
+                                        <span class="grid-product-discount"> <i class="fi-price-tag"> </i>10% off</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a href="/">
+                                    <img src="http://www.fillmurray.com/200/200" />
+                                    <div class="panel">
+                                        <span class="grid-product-name">Perfumer's Alcohol</span>
+                                        <br />
+                                        <!--<span class="grid-product-price-discounted">£9.99</span>
+                                <span class="grid-product-price">£9.99</span><br />-->
+                                        <span class="grid-product-discount"> <i class="fi-price-tag"> </i>10% off</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a href="/">
+                                    <img src="http://www.fillmurray.com/200/200" />
+                                    <div class="panel">
+                                        <span class="grid-product-name">Perfumer's Alcohol</span>
+                                        <br />
+                                        <!--<span class="grid-product-price-discounted">£9.99</span>
+                                <span class="grid-product-price">£9.99</span><br />-->
+                                        <span class="grid-product-discount"> <i class="fi-price-tag"> </i>10% off</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a href="/">
+                                    <img src="http://www.fillmurray.com/200/200" />
+                                    <div class="panel">
+                                        <span class="grid-product-name">Perfumer's Alcohol</span>
+                                        <br />
+                                        <!--<span class="grid-product-price-discounted">£9.99</span>
+                                <span class="grid-product-price">£9.99</span><br />-->
+                                        <span class="grid-product-discount"> <i class="fi-price-tag"> </i>10% off</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a href="/">
+                                    <img src="http://www.fillmurray.com/200/200" />
+                                    <div class="panel">
+                                        <span class="grid-product-name">Perfumer's Alcohol</span>
+                                        <br />
+                                        <!--<span class="grid-product-price-discounted">£9.99</span>
+                                <span class="grid-product-price">£9.99</span><br />-->
+                                        <span class="grid-product-discount"> <i class="fi-price-tag"> </i>10% off</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a href="/">
+                                    <img src="http://www.fillmurray.com/200/200" />
+                                    <div class="panel">
+                                        <span class="grid-product-name">Perfumer's Alcohol</span>
+                                        <br />
+                                        <!--<span class="grid-product-price-discounted">£9.99</span>
+                                <span class="grid-product-price">£9.99</span><br />-->
+                                        <span class="grid-product-discount"> <i class="fi-price-tag"> </i>10% off</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a href="/">
+                                    <div class="panel">
+                                        <i class="fi-plus"></i>
+                                        <br />
+                                        <span>See All</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h2 class="inverse-header"><img src="/images/savings-fox.png" /> Free Shipping on orders over £30.00</h2>
+                        </div>
+                    </div>
+
+                    <div class="medium-4 small-12 columns">
+                        <div id="homepage-blurb">
+                            <h2>Our Story</h2>
+                            <p>We are Crafty and we would like to welcome you to our site. We are a small UK-based company, specialising in goods for the craft industries. Our main focus is on fragrances and perfumery supplies.</p>
+                            <p>Starting out in 2015, we are still young pups in the industry, but we plan to grow quickly and we believe that our focus on meeting the needs of other small businesses, micro-enterprises and home-crafters will stand us in good
+                                stead for the future.</p>
+                            <p>We are passionate about providing only the highest quality products and service to our customers. We also know that our product-knowledge and experience will be a vital resource to you as you grow your own crafty business.
+                                So we are here to help with before and after-sales support.</p>
+                            <p>We hope to hear from you soon!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="small-12 columns">
+                        <hr />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="callout small-12 medium-7 columns">
+                        <div class="row">
+                            <div class="small-12 columns">
+                                <h3>Product of the Month</h3>
+                            </div>
+                            <div class="small-4 columns">
+                                <img src="http://fillmurray.com/150/150" style="vertical-align: top;" />
+                            </div>
+                            <div class="small-8 columns">
+                                <h4><a href="/">Bill Murray</a></h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                            <div class="small-12 columns">
+                                <p><b>Sizes Available:</b> 50g, 100g, 250g, 500g, 1Kg, 2.5Kg, 5Kg</p>
+                                <a href="/" class="button expanded">View Full Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="small-12 medium-5 columns">
+                        <h3>Browse Categories</h3>
+                        <div class="categories-carousel">
+                            <div class="item">
+                                <a href="/"><img src="http://fillmurray.com/200/200" align="center" />
+                                    <span>Category 1</span></a>
+                            </div>
+                            <div class="item">
+                                <a href="/"><img src="http://fillmurray.com/200/200" />
+                                    <span style="text-align: center;">Category 2</span></a>
+                            </div>
+                            <div class="item">
+                                <a href="/"><img src="http://fillmurray.com/200/200" />
+                                    <span style="text-align: center;">Category 3</span></a>
+                            </div>
+                            <div class="item">
+                                <a href="/"><img src="http://fillmurray.com/200/200" />
+                                    <span style="text-align: center;">Category 4</span></a>
+                            </div>
+                            <div class="item">
+                                <a href="/"><img src="http://fillmurray.com/200/200" />
+                                    <span style="text-align: center;">Category 5</span></a>
+                            </div>
+                            <div class="item">
+                                <a href="/"><img src="http://fillmurray.com/200/200" />
+                                    <span style="text-align: center;">Category 6</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="small-12 columns">
+                        <h3>News, Tutorials and More from the Blog</h3>
+                        <div class="row">
+                            <article class="small-12 columns panel">
+                                <div class="small-4 medium-2 columns">
+                                    <img src="http://fillmurray.com/100/100">
+                                </div>
+                                <div class="small-8 medium-10 columns">
+                                    <span class="blog-title"><a href="/">10 Reasons to love Bill Murray</a></span>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua <a href="/">...read more.</a></p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="row">
+                            <article class="small-12 columns panel">
+                                <div class="small-8 medium-10 columns">
+                                    <span class="blog-title"><a href="/">5 Things You Didnt Know about Bill Murray</a></span>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua <a href="/">...read more.</a></p>
+                                </div>
+                                <div class="small-4 medium-2 columns">
+                                    <img src="http://fillmurray.com/100/100">
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Content -->
+                <footer>
+                    <div id="footer-topper" class="hide-for-small">
+                        <div id="footer-graphic">
+
+                        </div>
+                    </div>
+                    <div id="newsletter-signup">
+                        <div class="row">
+                            <div class="medium-6 columns">
+                                <h3>All the latest deals and savings...</h3>
+                                <p>Delivered straight to your inbox. Don't miss out!</p>
+                            </div>
+                            <div class="medium-6 columns">
+                                <form method="POST" action="/">
+                                    <div class="row collapse">
+                                        <div class="medium-8 columns">
+                                            <input type="text" placeholder="Your E-mail Address" />
+                                        </div>
+                                        <div class="medium-4 columns">
+                                            <a class="button postfix">Sign Up Now</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="footer-body">
+                        <div class="row">
+                            <div class="medium-4 columns">
+                                <h3>Shop Categories</h3>
+                                <ul class="no-bullet">
+                                    <li><a href="/">Category 1</a></li>
+                                    <li><a href="/">Category 2</a></li>
+                                    <li><a href="/">Category 3</a></li>
+                                    <li><a href="/">Category 4</a></li>
+                                    <li><a href="/">Category 5</a></li>
+                                    <li><a href="/">Category 6</a></li>
+                                    <li><a href="/">Category 7</a></li>
+                                </ul>
+                            </div>
+                            <div class="medium-4 columns">
+
+                            </div>
+                            <div class="medium-4 columns footer-bordered">
+                                <h3>Any Questions?</h3>
+                                <form method="POST" action="/">
+                                    <input type="text" placeholder="Your E-mail" />
+                                    <textarea rows="4" placeholder="Your Message"></textarea>
+                                    <a href="/" class="button expanded">Send Us A Message</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="footer">
+                        <div class="row">
+                            <div class="medium-9 columns">
+                                <div class="row">
+                                    <!--<div class="medium-2 columns hide-for-small">-->
+                                    <!--    <a href="/" class="footer-logo"><img src="/images/crafty-logo.png" /></a>-->
+                                    <!--</div>-->
+                                    <div class="small-12 medium-10 columns">
+                                        <ul class="menu">
+                                            <li><a href="/">Home</a></li>
+                                            <li><a href="/">Contact Us</a></li>
+                                            <li><a href="/">Terms & Conditions</a></li>
+                                            <li><a href="/">Privacy Policy</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <p>&copy; Copyright 2015 - Present. Phoenix Supplies Ltd. All rights reserved.</p>
+                            </div>
+                            <div class="medium-3 columns">
+                                <ul class="menu">
+                                    <li>
+                                        <a href="/">
+                                            <span class="fa-stack fa-lg">
+                                          <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                                          <i class="fa fa-twitter fa-stack-1x"></i>
+                                        </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/">
+                                            <span class="fa-stack fa-lg">
+                                          <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                                          <i class="fa fa-youtube fa-stack-1x"></i>
+                                        </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/">
+                                            <span class="fa-stack fa-lg">
+                                          <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                                          <i class="fa fa-facebook fa-stack-1x"></i>
+                                        </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        </div>
+    </body>
 </template>

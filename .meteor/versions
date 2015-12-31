@@ -34,6 +34,7 @@ email@1.0.8
 es5-shim@4.1.14
 fastclick@1.0.7
 fortawesome:fontawesome@4.4.0
+fourseven:scss@3.4.1
 geojson-utils@1.0.4
 gfk:notifications@1.1.4
 hot-code-push@1.0.0
@@ -95,9 +96,11 @@ themeteorchef:jquery-validation@1.14.0
 timbrandin:hashids@1.0.0
 tracker@1.0.9
 u2622:persistent-session@0.4.4
+udondan:slick@1.3.11_1
 ui@1.0.8
 underscore@1.0.4
 url@1.0.5
 webapp@1.2.3
 webapp-hashing@1.0.5
 zimme:active-route@2.3.2
+zurb:foundation-sites@6.1.1

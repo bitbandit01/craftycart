@@ -1,0 +1,266 @@
+@import url(http://fonts.googleapis.com/css?family=Euphoria+Script);
+@import 'settings';
+@import '{zurb:foundation-sites}/scss/foundation';
+@include foundation-everything;
+
+/* CSS declarations go here */
+
+#login-error,
+#register-error,
+#recovery-error,
+#recovery-success,
+#reset-error,
+#reset-success{
+    display: none;
+}
+
+.off-canvas,
+.off-canvas-wrapper-inner {
+    min-height: 100vh;
+    height: 100vh;
+}
+
+/* HOMEPAGE CONTENT */
+
+#homepage-blurb {
+  background: url("/images/about-fox.png");
+  background-position: top right;
+  background-repeat: no-repeat;
+}
+
+#homepage-blurb h2 {
+  padding-bottom: 120px;
+}
+
+.categories-carousel .item{
+  margin-left: 3px;
+  text-align: center;
+}
+// .owl-carousel .item img {
+//   display: block;
+//   width: 100%;
+//   height: auto;
+// }
+
+
+/* PRODUCT PAGE CONTENT */
+
+#product-price {
+    display: block;
+    width: 100%;
+    font-size: rem-calc(24);
+    text-align: right;
+    margin-bottom: 12px;
+}
+
+#product-price-value {
+    color: $primary-color;
+}
+
+/* PRODUCT GRID STYLES */
+
+.grid-product-name {
+  font-size: rem-calc(18);
+  font-weight: 500;
+}
+
+.grid-product-price-discounted {
+  color: firebrick;
+  text-decoration: line-through;
+  font-size: rem-calc(14);
+}
+.grid-product-discount {
+  color: firebrick;
+  font-size: rem-calc(16);
+  text-transform: uppercase;
+  padding-top: 1.4em;
+}
+.grid-product-price {
+  font-weight: bold;
+}
+
+.product-grid li a {
+  color: #3A3330;
+}
+
+.product-grid li a img:hover {
+  border: 2px solid $primary-color;
+}
+
+.product-grid li a div.panel:hover {
+  color: $primary-color;
+}
+
+.product-grid li .panel {
+  min-height: 140px;
+  padding: 12px;
+}
+
+.product-grid li:last-of-type .panel{
+  height: 285px;
+  text-align: center;
+  color: silver;
+  font-family: $header-font-family;
+  font-size: rem-calc(42);
+  line-height: 1.2em;
+}
+
+.product-grid li:last-of-type div.panel:hover {
+  color: scale_color(silver, $lightness: -20%);
+}
+
+.product-grid li:last-of-type i {
+  font-size: rem-calc(72);
+  line-height: 1.4em;
+}
+
+/* NAV STYLES */
+
+.top-bar-section ul li > a {
+    font-size: rem-calc(14);
+    font-weight: 500;
+}
+
+#main-search-input {
+    min-width: 18rem;
+    @media only screen and (max-width: 40em) {
+        min-width: 14rem;
+    }
+}
+
+.breadcrumbs {
+    margin-top: 14px;
+}
+
+
+/* HEADER STYLES */
+
+.inverse-header {
+  background-color: #3A3330;
+  color: white;
+  padding: 6px;
+}
+
+header img {
+  max-height: 150px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+header h1 {
+  display: inline-block;
+}
+
+
+/* FOOTER STYLES */
+
+footer {
+  color: white;
+}
+footer h4 {
+  color: white;
+}
+
+#footer-graphic {
+  height: 100px;
+  background: url("/images/fox-border.png");
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
+
+#newsletter-signup {
+  background-color: #3A3330;
+  color: white;
+}
+#newsletter-signup h3 {
+  color: white;
+}
+
+#newsletter-signup form {
+  margin-top: 20px;
+}
+
+#footer-body{
+  background: url("/images/footer-background.png");
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  padding: 24px 0;
+}
+
+// #footer-body ul {
+//   margin-left: 0;
+// }
+
+// #footer-body ul li {
+//   list-style: none;
+// }
+
+.footer-bordered {
+  border-left: 1px solid #ccc;
+  height: 260px;
+}
+
+#footer {
+  background-color: #0e0e0e;
+  padding: 24px 0 10px;
+}
+
+// #footer a {
+//   color: white !important;
+// }
+
+.footer-logo {
+  display: inline-block;
+  color: #ccc;
+}
+.footer-logo img {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  vertical-align: middle;
+}
+
+// #footer ul {
+//   margin-top: 10px;
+// }
+
+// ul#footer-social-links {
+//   display: block;
+//   float: right;
+//   margin-bottom: 8px;    
+// }
+// ul#footer-social-links li {
+//   list-style: outside none none;
+//   display: block;
+//   float: left;
+// }
+// ul#footer-social-links li a {
+//   display: block;
+//   width: 50px;
+//   height: 50px;
+//   font-size: 2.5rem;
+//   color: #ccc;
+// }
+
+/* SHOPPING CART STYLES */
+.cart-remove {
+    font-size: rem-calc(24);
+    color: scale_color(red, $lightness: -20%);
+}
+
+.strikethrough-diagonal {
+    position: relative;
+    display: inline-block;
+}
+.strikethrough-diagonal::before, .strikethrough-diagonal::after {
+    content: '';
+    width: 100%;
+    position: absolute;
+    right: 0;
+    top: 50%;
+}
+.strikethrough-diagonal::before {
+    border-bottom: 2px solid red;
+    -webkit-transform: skewY(-10deg);
+    transform: skewY(-10deg);
+}

@@ -6,7 +6,25 @@ Meteor.startup(function () {
 
 Template.layout.onCreated(function(){
    DocHead.setTitle('Crafty Cart');
-   showLogin = new ReactiveVar(false);
+});
+
+Template.layout.onRendered(function(){
+    $(document).foundation();
+    $('.categories-carousel').slick({
+        infinite: true,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        dots: true,
+        arrows: true
+    });
+    //this.offCanvas = new Foundation.OffCanvas($('#offCanvas'));
+});
+
+Template.layout.onDestroyed(function(){
+    // let offCanvas = this.offCanvas;
+    // if(offCanvas){
+    //     offCanvas.destroy();
+    // }
 });
 
 Template.layout.helpers({
@@ -15,16 +33,6 @@ Template.layout.helpers({
     }
 });
 
-Template.layout.events({
-    'click #login' : function(e){
-        e.preventDefault();
-        showLogin.set(true);
-    },
-    'click #cancelLogin' : function(e){
-        e.preventDefault();
-        showLogin.set(false);
-    }
-});
 
 Template.userHeader.helpers({
     userEmail : function(){
